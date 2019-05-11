@@ -230,7 +230,7 @@ namespace PebbleCmd
             {
                 Console.WriteLine( "ERROR" );
                 Console.WriteLine( result.ErrorMessage );
-                Console.WriteLine( result.ErrorDetails.ToString() );
+                Console.WriteLine( result.ErrorDetails );
             }
         }
 
