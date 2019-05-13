@@ -17,7 +17,7 @@ namespace PebbleSharp.Net45
         {
             var client = new BluetoothClient();
 
-            // A list of all BT devices that are paired, in range, and named "Pebble *" 
+            // A list of all BT devices that are paired, in range, and named "Pebble *"
             var bluetoothDevices = client.DiscoverDevices( 20, true, false, false ).
                 Where( bdi => bdi.DeviceName.StartsWith( "Pebble " ) ).ToList();
 
@@ -68,7 +68,7 @@ namespace PebbleSharp.Net45
                 {
                     _tokenSource.Cancel();
                 }
-                
+
                 if ( _client.Connected )
                 {
                     _client.Close();
@@ -79,6 +79,7 @@ namespace PebbleSharp.Net45
             {
                 if ( _networkStream.CanWrite )
                 {
+                    Console.WriteLine($">>> {BitConverter.ToString(data)}");
                     _networkStream.Write( data, 0, data.Length );
                 }
             }
@@ -111,6 +112,9 @@ namespace PebbleSharp.Net45
                             var buffer = new byte[256];
                             var numRead = _networkStream.Read( buffer, 0, buffer.Length );
                             Array.Resize( ref buffer, numRead );
+
+                            Console.WriteLine($"<<< {BitConverter.ToString(buffer)}");
+
                             DataReceived( this, new BytesReceivedEventArgs( buffer ) );
                         }
 
