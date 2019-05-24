@@ -50,7 +50,8 @@ namespace PebbleCmd
                 "Send Ping",
                 "Media Commands",
                 "Install App",
-                "Send App Message");
+                "Send App Message",
+                "Get currently running app");
             while ( true )
             {
                 switch ( menu.ShowMenu() )
@@ -83,6 +84,14 @@ namespace PebbleCmd
                         break;
                     case 7:
                         SendAppMessage(pebble);
+                        break;
+                    case 8:
+                        var requestPacket = new AppRunStatePacket
+                        {
+                            Command = AppRunState.Request,
+                        };
+                        var appRunStateResult = await pebble.SendMessageAsync<AppRunStateResponse>(Endpoint.AppRunState, requestPacket.GetBytes());
+                        DisplayResult(appRunStateResult, x => $"Current app: {x.UUID.ToString()}");
                         break;
                 }
             }

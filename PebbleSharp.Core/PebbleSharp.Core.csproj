@@ -66,6 +66,7 @@
     <Compile Include="Responses\FirmwareVersionResponse.cs" />
     <Compile Include="Responses\IResponse.cs" />
     <Compile Include="Responses\MusicControlResponse.cs" />
+    <Compile Include="Responses\AppRunStateResponse.cs" />
     <Compile Include="Responses\PhoneVersionResponse.cs" />
     <Compile Include="Responses\PingResponse.cs" />
     <Compile Include="Responses\ResponseBase.cs" />
