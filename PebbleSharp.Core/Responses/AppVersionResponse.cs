@@ -15,6 +15,7 @@ namespace PebbleSharp.Core
 	    bugfix_version = Uint8()
 	    protocol_caps = Uint64()*/
 
+        public byte Command { get; set; }
 		public uint ProtocolVersion { get; set; }
 		public uint SessionCaps { get; set; }
 		public uint PlatformFlags { get; set; }
@@ -40,6 +41,7 @@ namespace PebbleSharp.Core
 
 		public AppVersionResponse()
 		{
+            Command = 0x01; // Response.
 			ProtocolVersion = 0xFFFFFFFF;
 			SessionCaps = 0x80000000;
 			PlatformFlags = 50;
@@ -53,6 +55,7 @@ namespace PebbleSharp.Core
 		public byte[] GetBytes()
 		{
 			var bytes = new List<byte>();
+            bytes.Add(Command);
 			bytes.AddRange(BitConverter.GetBytes(ProtocolVersion));
 			bytes.AddRange(BitConverter.GetBytes(SessionCaps));
 			bytes.AddRange(BitConverter.GetBytes(PlatformFlags));
